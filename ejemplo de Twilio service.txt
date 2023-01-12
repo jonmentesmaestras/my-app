@@ -1,0 +1,30 @@
+<cfscript>
+
+
+	stage = "Create New Credentials";
+
+	twilioCom = createObject("component","/SPservices.sms.Twilio");
+	
+	twilioResp = "";
+	creditorAcctName = "Jon019";
+
+	twilioResp = twilioCom.addSubAccount(creditorAcctName);
+
+		if (twilioResp.error == true)
+			throw (message = twilioResp.message )
+		}
+		
+	writedump(twilioResp);	
+
+	twilioObj = entityNew(SiTSTwilioEnter)
+	AccountSid	= twilioResp.subaccountID
+	AuthToken	= twilioResp.subaccountToken
+	Phone		= twilioResp.phoneNumber
+	PhoneSid	= twilioResp.phoneID 
+	MessagingSid	= twilioResp.MsgSrvID
+
+	 
+	
+
+	
+</cfscript>
